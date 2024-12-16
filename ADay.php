@@ -114,6 +114,18 @@ abstract class ADay
   public static function readMap(string $file): array
   {
     $lines = self::readLines($file);
+    return self::parseMapFromLines($lines);
+  }
+
+  /**
+   * Parse map from lines.
+   *
+   * @param list<string> $lines
+   *
+   * @return list<list<string>> [x => [y => cell]]
+   */
+  public static function parseMapFromLines(array $lines): array
+  {
     $map = [];
 
     foreach($lines as $y => $line)
@@ -125,5 +137,25 @@ abstract class ADay
     }
 
     return $map;
+  }
+
+  /**
+   * Print map.
+   *
+   * @param list<list<string>> $map
+   *
+   * @return void
+   */
+  public static function printMap(array $map): void
+  {
+    for($y = 0, $yMax = count($map[0]); $y < $yMax; $y++)
+    {
+      for($x = 0, $xMax = count($map); $x < $xMax; $x++)
+      {
+        echo $map[$x][$y];
+      }
+
+      echo PHP_EOL;
+    }
   }
 }
